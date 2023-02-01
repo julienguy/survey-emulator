@@ -1,0 +1,12 @@
+SURVEY_DURATION_YEARS: 5.
+SURVEY_AREA_DEG2: 5000.
+NUMBER_OF_FIBERS: 5000
+NUMBER_OF_SKY_FIBERS: 0
+NUMBER_OF_STAR_FIBERS: 0
+# 6 mm patrol radius = 1.42 arcmin (plate scale from 107um for 1.52 arcsec)
+FIBER_PATROL_AREA_DEG2: 0.00176
+# 420 mm radius
+FOCAL_PLANE_AREA_DEG2: 8.63
+# sum of efftime_spec between May 14, 2021 and May 14, 2022 for main, darktime program
+EFFECTIVE_TIME_PER_YEAR_HOURS: 700.
+EFFECTIVE_TIME_PER_TILE_SECONDS: 1200.

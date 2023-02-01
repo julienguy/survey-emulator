@@ -1,0 +1,16 @@
+SURVEY_DURATION_YEARS: 6.
+SURVEY_AREA_DEG2: 5000.
+# pessimistic number of valid positioners
+NUMBER_OF_FIBERS: 4000
+# only 20 extra fibers per petal for sky because we use broken motors (TBD)
+NUMBER_OF_SKY_FIBERS: 200
+# 10 std stars per petal
+NUMBER_OF_STAR_FIBERS: 100
+# 6 mm patrol radius = 1.42 arcmin (plate scale from 107um for 1.52 arcsec)
+# 10% smaller after tuning
+FIBER_PATROL_AREA_DEG2: 0.0015
+# 420 mm radius
+FOCAL_PLANE_AREA_DEG2: 8.63
+# sum of efftime_spec between May 14, 2021 and May 14, 2022 for main, darktime program
+EFFECTIVE_TIME_PER_YEAR_HOURS: 700.
+EFFECTIVE_TIME_PER_TILE_SECONDS: 1200.

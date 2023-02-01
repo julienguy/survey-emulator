@@ -1,0 +1,16 @@
+SURVEY_DURATION_YEARS: 5
+SURVEY_AREA_DEG2: 8000.
+# new focal plane
+NUMBER_OF_FIBERS: 11250
+# 40 fibers per petal for sky
+NUMBER_OF_SKY_FIBERS: 400
+# 10 std stars per petal
+NUMBER_OF_STAR_FIBERS: 100
+# 4 mm patrol radius, but 3.7mm effective position radius to match instrumented area
+# reported in DESI-7252 slide 15, then apply plate scale from 107 um to 1.52 arcsec
+FIBER_PATROL_AREA_DEG2: 0.00067
+# 420 mm radius
+FOCAL_PLANE_AREA_DEG2: 8.63
+# sum of efftime_spec between May 14, 2021 and May 14, 2022 for main, darktime program
+EFFECTIVE_TIME_PER_YEAR_HOURS: 700.
+EFFECTIVE_TIME_PER_TILE_SECONDS: 1200.
