@@ -1,0 +1,34 @@
+SURVEY_DURATION_YEARS: 5
+SURVEY_AREA_DEG2: 14000.
+# new focal plane
+NUMBER_OF_FIBERS: 26100
+# 5% of fibers
+NUMBER_OF_SKY_FIBERS: 1305
+# 1% of fibers to std stars
+NUMBER_OF_STAR_FIBERS: 261
+# 4 mm patrol radius, but 3.7mm effective position radius to match instrumented area
+# reported in DESI-7252 slide 15, keep the same for MegaMapper (same modules)
+# MegaMapper platescale = 0.113 mm/arcsec
+# Patrol radius = 0.545 arcmin
+FIBER_PATROL_AREA_DEG2: 0.00026
+# From arxiv:2209.04322
+# gives instrumented fraction = 0.96
+FOCAL_PLANE_AREA_DEG2: 7.06
+# sum of efftime_spec between May 14, 2021 and May 14, 2022 for main, darktime program
+# 700 x 3.2 for MegaMapper
+EFFECTIVE_TIME_PER_YEAR_HOURS: 2240.0
+# 1200s x 3.2 for MegaMapper
+EFFECTIVE_TIME_PER_TILE_SECONDS: 3840.
+
+# Max magnitude
+RMAG_MAX: 24.5
+
+# Total target density (optional, overwrites the integral of the magnitude distibution)
+# TOTAL_TARGET_DENSITY: 1000
+
+# Demographics of LBGs in the target selection sample
+TARGET_FRAC_LBG_TEMPLATE_0: 0.17
+TARGET_FRAC_LBG_TEMPLATE_1: 0.14
+TARGET_FRAC_LBG_TEMPLATE_2: 0.14
+TARGET_FRAC_LBG_TEMPLATE_3: 0.25
+TARGET_FRAC_NON_LBG: 0.3 # just to check

@@ -1,7 +1,8 @@
-SURVEY_DURATION_YEARS: 4
-SURVEY_AREA_DEG2: 5000.
+SURVEY_DURATION_YEARS: 5
+# half of 14,000 deg2 because we consider 2 sites with the same instrument
+SURVEY_AREA_DEG2: 7000.
 # new focal plane
-NUMBER_OF_FIBERS: 11250
+NUMBER_OF_FIBERS: 14000
 # 40 fibers per petal for sky
 NUMBER_OF_SKY_FIBERS: 400
 # 10 std stars per petal
@@ -12,11 +13,12 @@ FIBER_PATROL_AREA_DEG2: 0.00067
 # 420 mm radius
 FOCAL_PLANE_AREA_DEG2: 8.63
 # sum of efftime_spec between May 14, 2021 and May 14, 2022 for main, darktime program
-EFFECTIVE_TIME_PER_YEAR_HOURS: 700.
+# 700*1.2 with reduced readnoise in CCDs
+EFFECTIVE_TIME_PER_YEAR_HOURS: 840.
 EFFECTIVE_TIME_PER_TILE_SECONDS: 1200.
 
 # Max magnitude
-RMAG_MAX: 24.2
+RMAG_MAX: 24.5
 
 # Total target density (optional, overwrites the integral of the magnitude distibution)
 # TOTAL_TARGET_DENSITY: 1000
