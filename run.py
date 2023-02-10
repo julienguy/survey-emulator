@@ -51,7 +51,8 @@ def fiber_assignement_prob(target_density_deg2,params) :
         prob = max(0,min(1,(nfibers-nassigned)*fiber_to_focal_plane))
         nassigned += prob
         if nassigned >= nfibers : break
-    return nassigned/ntargets
+    nfree = max(0,nfibers-nassigned)
+    return nassigned/ntargets , nfree
 
 def fiber_assignement_prob_rnd(target_density_deg2,params) :
     ntargets              = int(params["FOCAL_PLANE_AREA_DEG2"]*target_density_deg2)
@@ -65,7 +66,8 @@ def fiber_assignement_prob_rnd(target_density_deg2,params) :
         probs.append(prob)
         nassigned += int(prob>np.random.uniform())
         if nassigned >= nfibers : break
-    return probs
+    nfree = max(0,nfibers-nassigned)
+    return probs , nfree
 
 
 def main() :
@@ -99,7 +101,7 @@ def main() :
 
     print("")
     print("Outputs:")
-    fprob=fiber_assignement_prob(actual_total_target_density,params)
+    fprob , nfree = fiber_assignement_prob(actual_total_target_density,params)
     print("fiber assignment probability = {:.3f}".format(fprob))
 
     if args.debug :
@@ -117,6 +119,9 @@ def main() :
     nobs=(ntiles*params["FOCAL_PLANE_AREA_DEG2"])/params["SURVEY_AREA_DEG2"]
     print("number of observations of each pos in the survey = {:.1f}".format(nobs))
 
+    print("number of free fibers per exposure  = {:.1f}".format(nfree))
+    print("density of free fibers per exposure = {:.1f} per deg2".format(nfree/params["FOCAL_PLANE_AREA_DEG2"]))
+    print("density of free fibers on sky       = {:.1f} per deg2".format(nfree/params["FOCAL_PLANE_AREA_DEG2"]*nobs))
 
 
 
@@ -134,7 +139,6 @@ def main() :
     if k not in params.keys() :
         print(f"error, missing keyword {k} in config (need it for cross-check)")
         sys.exit(12)
-    print(k,params[k])
     sum_frac += float(params[k])
     if np.abs(sum_frac-1)>0.01 :
         print("Error, not all targets are described. The sum of TARGET_FRAC_LBG_TEMPLATE_X + TARGET_FRAC_NON_LBG should be 1, and I have {:.3f}".format(sum_frac))
