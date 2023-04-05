@@ -80,6 +80,8 @@ def main() :
                         help = 'path to survey config yaml file')
     parser.add_argument('-d','--debug', action = 'store_true',
                         help = 'verbose and debugging tests')
+    parser.add_argument('-p','--plot', action = 'store_true',
+                        help = 'show figures')
 
     args = parser.parse_args()
 
@@ -190,56 +192,45 @@ def main() :
     target_density=np.array(target_density)
     redshift_density=np.array(redshift_density)
 
-
-    plt.figure("redshift success")
-    ax=plt.subplot(121)
-    plt.plot(mag_bin_centers,target_density,"--",c="k")
-    plt.plot(mag_bin_centers,redshift_density,"-",c="k")
+    if args.plot :
+        plt.figure("redshift success")
+        ax=plt.subplot(121)
+        plt.plot(mag_bin_centers,target_density,"--",c="k")
+        plt.plot(mag_bin_centers,redshift_density,"-",c="k")
     for template in lbg_template_frac :
         target_density_per_template[template]=np.array(target_density_per_template[template])
         redshift_density_per_template[template]=np.array(redshift_density_per_template[template])
 
-        plt.plot(mag_bin_centers,target_density_per_template[template],"--",color=f"C{template}")
-        plt.plot(mag_bin_centers,redshift_density_per_template[template],"-",color=f"C{template}")
+        if args.plot :
+            plt.plot(mag_bin_centers,target_density_per_template[template],"--",color=f"C{template}")
+            plt.plot(mag_bin_centers,redshift_density_per_template[template],"-",color=f"C{template}")
 
     total_target_density = np.sum(target_density)
     total_redshift_density = np.sum(redshift_density)
-    plt.text(0.05,0.95,'Target density = {:.1f}\nRedshift density = {:.1f} per deg2'.format(total_target_density,total_redshift_density),transform=ax.transAxes,verticalalignment="top")
+    if args.plot :
+        plt.text(0.05,0.95,'Target density = {:.1f}\nRedshift density = {:.1f} per deg2'.format(total_target_density,total_redshift_density),transform=ax.transAxes,verticalalignment="top")
 
     print("Target density   = {:.1f} per deg2".format(total_target_density))
     print("Redshift density = {:.1f} per deg2".format(total_redshift_density))
     print("Redshift success rate for all targets      = {:.1f}%".format(100*total_redshift_density/total_target_density))
     print("Redshift success rate for true LBG targets = {:.1f}%".format(100*total_redshift_density/(total_target_density*(1-params["TARGET_FRAC_NON_LBG"]))))
 
+    if args.plot :
+        plt.xlabel("rmag")
+        plt.ylabel("Number density per 0.1 mag per deg2")
+        #plt.legend(loc="lower left")
+        plt.grid()
 
-    plt.xlabel("rmag")
-    plt.ylabel("Number density per 0.1 mag per deg2")
-    #plt.legend(loc="lower left")
-    plt.grid()
+        plt.subplot(122)
+        plt.plot(mag_bin_centers,redshift_density/target_density,"-",c="k",label="All LBGs")
+        for template in lbg_template_frac :
+            plt.plot(mag_bin_centers,redshift_density_per_template[template]/target_density_per_template[template],"-",color=f"C{template}",label=f"LBG template {template}")
 
-    plt.subplot(122)
-    plt.plot(mag_bin_centers,redshift_density/target_density,"-",c="k",label="All LBGs")
-    for template in lbg_template_frac :
-        plt.plot(mag_bin_centers,redshift_density_per_template[template]/target_density_per_template[template],"-",color=f"C{template}",label=f"LBG template {template}")
-
-    plt.xlabel("rmag")
-    plt.ylabel("Redshift success")
-    plt.legend(loc="lower left")
-    plt.grid()
-    plt.show()
-
-
-
-
-
-
-    plt.figure("efftime")
-    plt.hist(efftime_per_target/3600.,bins=50)
-    plt.xlabel("Total effective time (hours)")
-    plt.grid()
-
-
-    if args.debug:
+        plt.xlabel("rmag")
+        plt.ylabel("Redshift success")
+        plt.legend(loc="lower left")
+        plt.grid()
         plt.show()
 
-main()
+if __name__ == "__main__" :
+    main()
